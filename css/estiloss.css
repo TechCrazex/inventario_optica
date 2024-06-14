@@ -1,0 +1,325 @@
+
+* {
+    color: black;
+}
+html{
+    background-image: url('../img/fondo-acuarela-pintada-mano-forma-cielo-nubes.jpg');
+    
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    height: 100%;
+}
+/* header */
+
+header{
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+.navbar-cont{
+    background: linear-gradient(to right,rgba(21, 119, 247, 0.60), rgba(37, 25, 169, 0.24));
+}
+.nav-btn-home{
+    position: relative;
+    left: 700px;
+    background: linear-gradient(to bottom,rgb(88, 100, 215), rgba(119, 188, 251, 1));
+    border-radius: 20px;
+    margin-right: 15px;
+}
+.nav-btn-home2{
+    position: relative;
+    right: 50px;
+}
+.nav-btn-home3{
+    color: #000000;
+    border: rgb(0, 0, 0) solid 1px;
+    background: linear-gradient(to bottom,rgb(88, 100, 215), rgba(119, 188, 251, 1));
+}
+
+
+/* terminar header */
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+
+    overflow-x: hidden; /* Evita la barra de desplazamiento horizontal */
+}
+.form{
+    position: relative;
+    text-align: center;
+    margin: 40px auto;
+    margin-bottom: 30px;
+    height: 100vh;   
+}
+
+table{
+    border: 1px solid #000;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 50PX;
+}
+
+th{
+    border: 1px solid #000;
+}
+
+td{
+    border: 1px solid #000;
+}
+
+.logo{
+    width: 250px;
+    margin: 20px 30px;
+}
+
+a{
+    text-decoration: none;
+    position: relative;
+    bottom: 30px;
+    margin: 0 30px;
+    padding: 5px 20px;
+    background: linear-gradient(rgba(122, 133, 234, 0.7), rgba(119, 188, 251, 0.7));
+    border: 1px solid transparent;
+    border-radius: 5px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: .5s;
+}
+
+a:hover{
+    background: linear-gradient(rgba(109, 119, 209, 0.7), rgba(104, 163, 219, 0.7));
+    transform: scale(1.01);
+}
+
+.formulario{
+    position: relative;
+    margin: 20px auto;
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    display: grid;
+    justify-content: center;
+}
+
+.formulario p{
+    width: 40%;
+    padding: 0 40px;
+    justify-content: center;
+    display: grid;
+    text-align: center;
+    
+}
+
+
+h1{
+    text-align: center;
+    color: #333;
+}
+
+.registro{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 300px;
+}
+
+.barra{
+    margin: 0 15px;
+    width: 200px;
+}
+.alfanumerico{
+    position: relative;
+    border-radius: 10px;
+    background-color: aqua;
+    color: white;
+    background: linear-gradient(rgba(122, 133, 234, 0.7), rgba(119, 188, 251, 0.7));
+    border: 1px solid transparent;
+    border-radius: 5px;
+    height: 25px;
+    margin-top: 35px;
+}
+
+/* desplegable */
+.container{
+    position: relative;
+    max-width: 320px;
+    width: 100%;
+    margin: 80px auto 30px;
+}
+.select-btn{
+    display: flex;
+    height: 50px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+.select-btn .btn-text{
+    font-size: 17px;
+    font-weight: 400;
+    color: #333;
+}
+.select-btn .arrow-dwn{
+    display: flex;
+    height: 21px;
+    width: 21px;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 50%;
+    background: #6e93f7;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+.select-btn.open .arrow-dwn{
+    transform: rotate(-180deg);
+}
+.list-items{
+    position: relative;
+    margin-top: 15px;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+.select-btn.open ~ .list-items{
+    display: block;
+}
+.list-items .item{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    height: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 0 15px;
+    border-radius: 8px;
+}
+.list-items .item:hover{
+    background-color: #e7edfe;
+}
+.item .item-text{
+    font-size: 16px;
+    font-weight: 400;
+    color: #333;
+}
+.item .checkbox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 16px;
+    width: 16px;
+    border-radius: 4px;
+    margin-right: 12px;
+    border: 1.5px solid #c0c0c0;
+    transition: all 0.3s ease-in-out;
+}
+.item.checked .checkbox{
+    background-color: #4070f4;
+    border-color: #4070f4;
+}
+.checkbox .check-icon{
+    color: #fff;
+    font-size: 11px;
+    transform: scale(0);
+    transition: all 0.2s ease-in-out;
+}
+.item.checked .check-icon{
+    transform: scale(1);
+}
+
+/* Continuacion del codigo */
+.boton{
+    position: relative;
+    left: 850px;
+    margin: 0 10px;
+    padding: 5px 20px;
+    background: linear-gradient(rgba(122, 133, 234, 0.7), rgba(119, 188, 251, 0.7));
+    border: 1px solid transparent;
+    border-radius: 5px;
+    transition: 0.5s;
+    margin-bottom: 30px;
+}
+
+.boton:hover{
+    transform: scale(1.1);
+    background: linear-gradient(rgba(109, 119, 209, 0.7), rgba(104, 163, 219, 0.7));
+}
+
+.formulario2{
+    border: 2px solid #000;
+    margin: 20px auto;
+    width: 90%;
+    height: 100vh;
+}
+.formulario2 h1{
+    margin-top: 20px;
+}
+
+.formulario2 label{
+    text-align: center;
+}
+
+.formulario2 .input{
+    position: relative;
+    height: 20px;
+}
+
+.boton2{
+    position: relative;
+    margin: 0 10px;
+    padding: 5px 20px;
+    background: linear-gradient(rgba(122, 133, 234, 0.7), rgba(119, 188, 251, 0.7));
+    border: 1px solid transparent;
+    border-radius: 5px;
+    transition: 0.5s;
+}
+
+.boton2:hover{
+    transform: scale(1.1);
+    background: linear-gradient(rgba(109, 119, 209, 0.7), rgba(104, 163, 219, 0.7));
+}
+
+
+.formulario3{
+    border: 2px solid #000;
+    margin: 40px auto;
+    width: 96%;
+}
+
+.boton3{
+    position: relative;
+    padding: 5px 20px;
+    background: linear-gradient(rgba(122, 133, 234, 0.7), rgba(119, 188, 251, 0.7));
+    border: 1px solid transparent;
+    border-radius: 20px;
+    transition: 0.5s;
+}
+
+.boton3:hover{
+    transform: scale(1.1);
+    background: linear-gradient(rgba(109, 119, 209, 0.7), rgba(104, 163, 219, 0.7));
+}
+
+h2{
+    text-align: center;
+}
+
+.boton4{
+    position: relative;
+    padding: 5px 20px;
+    background: linear-gradient(rgba(122, 133, 234, 0.7), rgba(119, 188, 251, 0.7));
+    border: 1px solid transparent;
+    border-radius: 20px;
+    transition: 0.5s;
+    left: 920px;
+    margin-top: 20px;
+}
+
+.boton4:hover{
+    transform: scale(1.1);
+    background: linear-gradient(rgba(109, 119, 209, 0.7), rgba(104, 163, 219, 0.7));
+}
+

@@ -1,0 +1,160 @@
+/* Barra de navegación */
+body, h1, h2, h3, p, ul {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+header {
+    color: white;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    max-height: 50px;
+    margin-left: 20px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav li {
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Registrar Proveedor */
+
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input {
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    background-color: #3133EF8C;
+    color: white;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: rgb(23, 152, 156); 
+}
+
+.tit-pri{
+    text-align: center;
+}
+.clientes-go{
+    width: 70%; 
+    height: 60px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+.ov-btn-grow-spin {
+    margin: 0 auto;
+    background: #3133EF8C; /* color de fondo */
+    color: #000000; /* color de fuente */
+    font-size: 20px;
+    border: 2px solid #000000; /* tamaño y color de borde */
+    padding: 10px 20px;
+    border-radius: 20px; /* redondear bordes */
+    position: relative; /* Posicion de botones */
+    z-index: 1;
+    overflow: hidden;
+    display: inline-block;
+    justify-content: space-between;
+  }
+  .ov-btn-grow-spin:hover {
+    color: #fff;/* color de fuente hover */
+  }
+  .ov-btn-grow-spin::after {
+    content: "";
+    background: rgb(96 96 201); /* color de fondo hover */
+    position: absolute;
+    z-index: -1;
+    padding: 16px 20px;
+    display: block;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    transform: scale(0, 0) rotate(-180deg);
+    transition: all 0.3s ease;
+  }
+  .ov-btn-grow-spin:hover::after {
+    transition: all 0.3s ease-out;
+    transform: scale(1, 1) rotate(0deg);  
+}
+
+.modal-dialog{
+    position: relative;
+    top: 100px;
+    margin: 0 auto;
+    width:500px ;
+    height: 600px;
+    background: #5ea3fe;
+    border-radius: 40px;
+    border: #000000 solid;
+    text-align: center;
+    font-size: 20px;
+}
+.modal-dialog h1{
+    margin-top: 40px;
+}
+.btn-fon{
+    background: red;
+}
+.btn-js{
+    border-radius: 20px;
+    width: 60px;
+    height: 30px;
+    background: #3133EF8C;
+    color: #ffffff;
+}
+.btn-actalizar{
+    /* width: 10px;
+    height: 40px;
+    background: #3133EF8C;
+    color: #000000; */
+    text-decoration: none;
+    color: #3134ef;
+}

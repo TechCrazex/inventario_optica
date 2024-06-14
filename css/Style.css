@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap')_;
+
+.tit-pri h1{
+    margin-left: 550px ;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    font-family: "EB Garamond", serif;
+}
+
+.light-table-filter{
+    margin-left: 50px;
+    margin-bottom: 20px;
+}
+
+.col-auto{
+    margin-left: 40px;
+    margin-bottom: 20px;
+}
+
+
+.table-id{
+    max-width: 1550px;
+    margin-left: 50px;
+    margin-bottom: 30px;
+}
+
+.btn-edi{
+    background-color: #0d6efd;
+    color: #fff;
+}
+
+.btn-eli{
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.btn-edi:hover{
+    background-color: #0d6efd;
+    color: #fff;
+}
+
+.btn-eli:hover{
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.modal-bodyy{
+    margin: 25px;  
+}
+
+.tit-prim{
+    text-align: center;
+    margin-bottom: 40px;
+    font-family: "EB Garamond", serif;
+}
+
+.btn{
+    margin-top: 10px;
+}
