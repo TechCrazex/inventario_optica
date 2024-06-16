@@ -1,8 +1,6 @@
 <?php
-
 require '../../includes/conexionBD.php';
 
-$Nit = $conn->real_escape_string($_POST['Nit']);
 $NombreEmpresa = $conn->real_escape_string($_POST['NombreEmpresa']);
 $NombreProveedor = $conn->real_escape_string($_POST['NombreProveedor']);
 $ProductoVender = $conn->real_escape_string($_POST['ProductoVender']);
@@ -10,11 +8,18 @@ $Direccion = $conn->real_escape_string($_POST['Direccion']);
 $Telefono = $conn->real_escape_string($_POST['Telefono']);
 $Correo = $conn->real_escape_string($_POST['Correo']);
 
-$sql = "INSERT INTO tblproveedores (Nit, NombreEmpresa, NombreProveedor, ProductoVender, Direccion, Telefono, Correo) 
-    VALUES ('$Nit', '$NombreEmpresa', '$NombreProveedor', '$ProductoVender', '$Direccion', '$Telefono', '$Correo')";
+// Obtener la fecha y hora actual del servidor
+$fechaRegistroPro = date('Y-m-d H:i:s');
+
+$sql = "INSERT INTO tblproveedores (NombreEmpresa, NombreProveedor, ProductoVender, Direccion, Telefono, Correo, fechaRegistroPro) 
+    VALUES ('$NombreEmpresa', '$NombreProveedor', '$ProductoVender', '$Direccion', '$Telefono', '$Correo', '$fechaRegistroPro')";
 
 if ($conn->query($sql)) {
-    $IdProveedor = $conn->insert_id;
+    // Éxito al insertar el proveedor, redirige a la página de registros de proveedores
     header('Location: registrarProveedor.php');
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
 }
+
+$conn->close();
 ?>
