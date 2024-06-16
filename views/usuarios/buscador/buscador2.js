@@ -36,7 +36,10 @@
         generarFacturaBtn.addEventListener('click', function() {
             buscarVentaForm.submit();
         });
-
+        generarFacturaBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+            buscarVentaForm.submit();
+        });
     
     });
 })();
