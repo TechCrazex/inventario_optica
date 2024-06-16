@@ -37,9 +37,6 @@
             buscarVentaForm.submit();
         });
 
-        // Nuevo: Al hacer clic en el botón oculto, se envía el formulario de generación de factura
-        generarFacturaSubmit.addEventListener('click', function() {
-            document.getElementById('generarFacturaForm').submit();
-        });
+    
     });
 })();
