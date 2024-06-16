@@ -26,55 +26,52 @@ $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 $pdf->SetFont('helvetica', '', 10);
 $pdf->AddPage();
 
-// Verificar si se ha enviado un parámetro de búsqueda
-if(isset($_POST['searchTerm'])) {
-    $search = $_POST['searchTerm'];
-    // Escapar caracteres especiales para evitar inyección SQL
-    $search = mysqli_real_escape_string($conn, $search);
-    $sql = "SELECT v.IdVenta, v.NumeroVenta, CONCAT(c.Nombres, ' ', c.Apellidos) AS Cliente, p.NombreProducto, v.CantidadVendida, v.PrecioUnidad, v.PrecioTotal, v.FechaVenta, v.Observación, cp.Categoria 
+// Verificar si se ha enviado el IdVenta desde el formulario
+if(isset($_POST['generar_informe']) && $_POST['generar_informe'] === 'compras' && isset($_POST['IdVenta'])) {
+    $idVenta = $_POST['IdVenta'];
+
+    // Consulta SQL para obtener los detalles de la venta
+    $sql = "SELECT v.IdVenta, CONCAT(c.Nombres, ' ', c.Apellidos) AS Cliente, p.NombreProducto, v.CantidadVendida, v.PrecioUnidad, v.PrecioTotal, v.FechaVenta, v.Observación, cp.Categoria 
             FROM tblventas v 
             JOIN tblclientes c ON v.IdCliente = c.IdCliente 
             JOIN tblproductos p ON v.IdProducto = p.IdProducto
             JOIN tblcategoriasproductos cp ON v.IdCategoria = cp.IdCategoria
-            WHERE c.Nombres LIKE '%$search%' OR c.Apellidos LIKE '%$search%' OR v.NumeroVenta = '$search' OR v.IdVenta = '$search'";
+            WHERE v.IdVenta = '$idVenta'";
+    
+    $result = mysqli_query($conn, $sql);
+    if(mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $fechaHora = date('Y-m-d', strtotime($row["FechaVenta"]));
+        $fechaHoraBogota = date('Y-m-d', strtotime("$fechaHora -5 hours"));
+
+        // Construir el contenido HTML de la factura
+        $html = '';
+        $html .= '<p>';
+        $html .= 'Hora actual: ' . date('H:i:s') . '<br>';
+        $html .= '</p>';
+
+        $html .= '<h3>Venta</h3>';
+        $html .= '<p>';
+        $html .= 'ID Venta: ' . $row["IdVenta"] . '<br>';
+        $html .= 'Cliente: ' . $row["Cliente"] . '<br>';
+        $html .= 'Producto: ' . $row["NombreProducto"] . '<br>';
+        $html .= 'Cantidad: ' . $row["CantidadVendida"] . '<br>';
+        $html .= 'Precio Unidad: ' . $row["PrecioUnidad"] . '<br>';
+        $html .= 'Precio Total: ' . $row["PrecioTotal"] . '<br>';
+        $html .= 'Fecha Venta: ' . $fechaHoraBogota . '<br>';
+        $html .= 'Observación: ' . $row["Observación"] . '<br>';
+        $html .= 'Categoría: ' . $row["Categoria"] . '<br>';
+        $html .= '</p>';
+
+        // Escribir el contenido HTML en el PDF
+        $pdf->writeHTML($html);
+
+        // Mostrar el PDF al usuario
+        $pdf->Output('factura.pdf', 'I');
+    } else {
+        echo "No se encontraron datos para el IdVenta proporcionado.";
+    }
 } else {
-    // Si no se ha enviado ningún parámetro de búsqueda, mostrar un mensaje de error
-    echo "No se ha proporcionado un término de búsqueda válido.";
-    exit;
-}
-
-$result = mysqli_query($conn, $sql);
-if(mysqli_num_rows($result) > 0) {
-    $row = mysqli_fetch_assoc($result);
-    $fechaHora = date('Y-m-d', strtotime($row["FechaVenta"]));
-    $fechaHoraBogota = date('Y-m-d', strtotime("$fechaHora -5 hours"));
-
-    // Construir el contenido HTML de la factura
-    $html = '';
-    $html .= '<p>';
-    $html .= 'Hora actual: ' . date('H:i:s') . '<br>';
-    $html .= '</p>';
-
-    $html .= '<h3>Venta</h3>';
-    $html .= '<p>';
-    $html .= 'ID Venta: ' . $row["IdVenta"] . '<br>';
-    $html .= 'Número Venta: ' . $row["NumeroVenta"] . '<br>';
-    $html .= 'Cliente: ' . $row["Cliente"] . '<br>';
-    $html .= 'Producto: ' . $row["NombreProducto"] . '<br>';
-    $html .= 'Cantidad: ' . $row["CantidadVendida"] . '<br>';
-    $html .= 'Precio Unidad: ' . $row["PrecioUnidad"] . '<br>';
-    $html .= 'Precio Total: ' . $row["PrecioTotal"] . '<br>';
-    $html .= 'Fecha Venta: ' . $fechaHoraBogota . '<br>';
-    $html .= 'Observación: ' . $row["Observación"] . '<br>';
-    $html .= 'Categoría: ' . $row["Categoria"] . '<br>';
-    $html .= '</p>';
-
-    // Escribir el contenido HTML en el PDF
-    $pdf->writeHTML($html);
-
-    // Mostrar el PDF al usuario
-    $pdf->Output('factura.pdf', 'I');
-} else {
-    echo "No se encontraron datos para el término de búsqueda proporcionado.";
+    echo "No se ha proporcionado un IdVenta válido o no se ha solicitado generar la factura.";
 }
 ?>
