@@ -1,136 +1,98 @@
 <?php
-$fecha_actual = date('Y-m-d H:i:s');
-date_default_timezone_set('Etc/GMT+5');
-require('tcpdf/tcpdf.php');
-
-class TCPDF_Tabla extends TCPDF {
-    private $customWidth; // Ancho personalizado del PDF
-
-    function __construct($orientation='P', $unit='mm', $size='A4', $customWidth = 450) {
-        parent::__construct($orientation, $unit, array(380, 100), true, 'UTF-8', false);
-        $this->customWidth = $customWidth;
-    }
-
-    function Table($header, $data, $tableWidth = null) {
-        $this->SetFont('helvetica', 'B', 12);
-
-        // Si se proporciona un ancho de tabla personalizado, lo usamos; de lo contrario, usamos el ancho predeterminado del PDF
-        $tableWidth = ($tableWidth !== null) ? $tableWidth : $this->customWidth;
-        // Inicializar los arrays para almacenar el ancho máximo de cada columna en el encabezado
-        $maxWidthHeader = array_fill(0, count($header), 0);
-
-        // Calcular el ancho máximo de cada columna en el encabezado
-        foreach ($header as $key => $value) {
-            $columnWidth = $this->GetStringWidth($value);
-            $maxWidthHeader[$key] = max($maxWidthHeader[$key], $columnWidth);
-        }
-
-        // Inicializar los arrays para almacenar el ancho máximo de cada columna en los datos
-        $maxWidthData = array_fill(0, count($header), 0);
-
-        // Calcular el ancho máximo de cada columna en los datos
-        foreach ($data as $row) {
-            foreach ($row as $key => $value) {
-                $columnWidth = $this->GetStringWidth($value);
-                $maxWidthData[$key] = max($maxWidthData[$key], $columnWidth);
-            }
-        }
-
-        // Calcular el ancho máximo entre el encabezado y los datos para cada columna
-        $maxWidthColumns = array_map(function($headerWidth, $dataWidth) {
-            return max($headerWidth, $dataWidth);
-        }, $maxWidthHeader, $maxWidthData);
-
-        // Ancho máximo para la columna 'Observacion'
-        // Puedes ajustar este valor según tus necesidades
-
-        // Encabezado
-        foreach ($header as $key => $value) {
-            $this->Cell($maxWidthColumns[$key] + 10, 8, $value, 1, 0, 'C'); // Aumenta el valor del ancho de la celda
-        }
-        $this->Ln();
-
-        // Datos
-        foreach ($data as $row) {
-            foreach ($row as $key => $value) {
-                if ($header[$key]=== 'Observación') {
-                    // Aplicar text wrapping a toda la columna 'Observacion'
-                    $this->MultiCell($maxWidthColumns[$key] + 10, 10, $value, 1, 'C');
-                    $maxWidthObservación = 10;
-                } else {
-                    $this->Cell($maxWidthColumns[$key] + 10, 10, $value, 1, 0, 'C'); // Aumenta el valor del ancho de la celda
-                }
-            }
-            $this->Ln();
-        }
-    }
-
-    function GetCustomWidth() {
-        return $this->customWidth;
-    }
+session_start();
+if (!isset($_SESSION['Correo'])) {
+    header('Location: ../../includes/_sesion/login.php');
+    exit();
 }
 
-// Función para obtener datos de la base de datos
-function fetchData($sql) {
-    global $mysqli;
-    $result = $mysqli->query($sql);
-    if ($result && $result->num_rows > 0) {
-        $rows = [];
-        while ($row = $result->fetch_assoc()) {
-            $rows[] = array_values($row); // Utilizar solo los valores de las filas
-        }
-        return $rows;
-    } else {
-        echo 'Error al obtener datos de la base de datos: ' . $mysqli->error;
-        return false;
-    }
-}
+// Incluir el archivo TCPDF
+require_once('tcpdf/tcpdf.php');
 
-if (isset($_POST['generar_informe'])) {
-    $tipo_informe = $_POST['generar_informe'];
+// Incluir el archivo de conexión a la base de datos
+require_once '../../includes/conexionBD.php';
 
-    // Establecer una conexión con la base de datos usando MySQLi
-    $mysqli = new mysqli('localhost', 'id21981269_crudoptica', 'Sena2617515.', 'id21981269_bdoptica');
-    if ($mysqli->connect_error) {
-        die('Connection failed: ' . $mysqli->connect_error);
+// Obtener las fechas de inicio y fin del formulario
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['fechaInicio']) && isset($_POST['fechaFin'])) {
+    $fechaInicio = $_POST['fechaInicio'];
+    $fechaFin = $_POST['fechaFin'];
+
+    // Validar las fechas (puedes implementar una validación más robusta si es necesario)
+    if ($fechaInicio > $fechaFin) {
+        die('La fecha de inicio no puede ser mayor que la fecha de fin.');
     }
 
-    // Define el ancho personalizado del PDF, por ejemplo, 250 mm
-    $customWidth = 250;
+    // Consulta SQL para obtener los proveedores dentro del rango de fechas
+    $sql = "SELECT IdProveedor, NombreEmpresa, NombreProveedor, Direccion, Telefono, Correo, fechaRegistroPro 
+            FROM tblproveedores 
+            WHERE fechaRegistroPro BETWEEN '$fechaInicio' AND '$fechaFin' 
+            ORDER BY fechaRegistroPro";
+    $result = mysqli_query($conn, $sql);
 
-    // Crear el PDF con el ancho personalizado
-    $pdf = new TCPDF_Tabla('L', 'mm', 'A4', $customWidth); // Ajustar el ancho y alto de la página (en este caso, tamaño A4)
-    $pdf->SetFont('helvetica', '', 12);
+    // Crear instancia de TCPDF
+    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
-    // Agregar una nueva página al PDF
+    // Establecer información del documento
+    $pdf->SetCreator(PDF_CREATOR);
+    $pdf->SetAuthor('Nombre del Autor');
+    $pdf->SetTitle('Informe de Proveedores');
+    $pdf->SetSubject('Informe de Proveedores');
+    $pdf->SetKeywords('TCPDF, PDF, informe, proveedores');
+
+    // Configurar márgenes
+    $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+    $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+    $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+
+    // Establecer auto página de inicio
+    $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+
+    // Establecer información de la página
+    $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+    $pdf->setJPEGQuality(90);
+
+    // Añadir una página
     $pdf->AddPage();
 
-    // Obtener los datos de la base de datos
-    $data = fetchData("SELECT IdProveedor, Nit, NombreEmpresa, NombreProveedor, Direccion, Telefono, Correo FROM tblproveedores");
+    // Cabecera
+    $html = '<h1>Informe de Proveedores</h1>';
+    $html .= '<p>Fecha de inicio: ' . $fechaInicio . '</p>';
+    $html .= '<p>Fecha de fin: ' . $fechaFin . '</p>';
 
-    if ($data) {
-        $fecha_formateada = date('Y-m-d H:i:s', time());
-        // Mostrar la fecha de creación en tiempo real con la zona horaria especificada
-        $pdf->Cell(0, 10, 'Fecha de Creación: ' . $fecha_formateada, 0, 1);
-        $pdf->Cell(40, 10, 'Tabla de Proveedores');
-        $pdf->Ln();
-        $pdf->SetFont('helvetica', '', 12);
+    // Crear tabla para mostrar los datos de proveedores
+    $html .= '<table border="1" cellpadding="5" cellspacing="0">';
+    $html .= '<tr>
+                <th>ID Proveedor</th>
+                <th>Nombre Empresa</th>
+                <th>Nombre Proveedor</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Correo</th>
+                <th>Fecha de Registro</th>
+              </tr>';
 
-        // Crear encabezado de la tabla
-        $header = array('IdProveedor', 'Nit', 'NombreEmpresa', 'NombreProveedor', 'Direccion', 'Telefono', 'Correo');
-
-        // Mostrar la tabla con el ancho personalizado (380 mm)
-        $pdf->Table($header, $data, 380);
-
-        // Mostrar la fecha de creación en tiempo real
-    } else {
-        $pdf->Cell(40, 10, 'No se encontraron datos');
+    while ($row = mysqli_fetch_assoc($result)) {
+        $html .= '<tr>';
+        $html .= '<td>' . $row['IdProveedor'] . '</td>';
+        $html .= '<td>' . $row['NombreEmpresa'] . '</td>';
+        $html .= '<td>' . $row['NombreProveedor'] . '</td>';
+        $html .= '<td>' . $row['Direccion'] . '</td>';
+        $html .= '<td>' . $row['Telefono'] . '</td>';
+        $html .= '<td>' . $row['Correo'] . '</td>';
+        $html .= '<td>' . $row['fechaRegistroPro'] . '</td>';
+        $html .= '</tr>';
     }
 
-    // Limpiar el búfer de salida
-    ob_clean(); 
+    $html .= '</table>';
 
-    // Salida del PDF
-    $pdf->Output();
+    // Escribir contenido HTML en el documento PDF
+    $pdf->writeHTML($html, true, false, true, false, '');
+
+    // Cerrar y generar el PDF
+    $pdf->Output('InformeProveedores.pdf', 'I');
+    exit;
+} else {
+    // Redirigir si no se recibieron las fechas
+    header('Location: ../../index.php');
+    exit();
 }
 ?>
