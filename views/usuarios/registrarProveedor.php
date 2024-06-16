@@ -34,17 +34,17 @@ if (!isset($_SESSION['Correo'])) {
         </div>    
     </form>
 
-    <form action="../../views/usuarios/generar_info_proveedores.php" method="post" target="_blank">
-        <div class="col-auto">
-        <button class="btn btn-primary" type="submit" name="generar_informe" value="proveedores">Generar informe</button>
-        </div>
-    </form>
+    <!--<form action="../../views/usuarios/generar_info_proveedores.php" method="post" target="_blank">-->
+    <!--    <div class="col-auto">-->
+    <!--    <button class="btn btn-primary" type="submit" name="generar_informe" value="proveedores">Generar informe</button>-->
+    <!--    </div>-->
+    <!--</form>-->
 
     <table class="table-id">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Nit</th>
+                <!--<th>Nit</th>-->
                 <th>Nombre Empresa</th>
                 <th>Nombre Proveedor</th>
                 <th>Producto Vender</th>
@@ -59,7 +59,7 @@ if (!isset($_SESSION['Correo'])) {
         <?php while($rowProveedores = $proveedores->fetch_assoc()) { ?>
             <tr>
                 <td><?=$rowProveedores['IdProveedor']; ?></td>
-                <td><?=$rowProveedores['Nit']; ?></td>
+                <!--<td><?=$rowProveedores['Nit']; ?></td>-->
                 <td><?=$rowProveedores['NombreEmpresa']; ?></td>
                 <td><?=$rowProveedores['NombreProveedor']; ?></td>
                 <td><?=$rowProveedores['ProductoVender']; ?></td>
@@ -90,7 +90,7 @@ if (!isset($_SESSION['Correo'])) {
             let IdProveedor = button.getAttribute('data-bs-id')
 
             let inputIdProveedor = ModalEditarProveedores.querySelector('.modal-body #IdProveedor')
-            let inputNit = ModalEditarProveedores.querySelector('.modal-body #Nit')
+            // let inputNit = ModalEditarProveedores.querySelector('.modal-body #Nit')
             let inputNombreEmpresa = ModalEditarProveedores.querySelector('.modal-body #NombreEmpresa')
             let inputNombreProveedor = ModalEditarProveedores.querySelector('.modal-body #NombreProveedor')
             let inputProductoVender = ModalEditarProveedores.querySelector('.modal-body #ProductoVender')
@@ -112,7 +112,7 @@ if (!isset($_SESSION['Correo'])) {
             .then(data => {
 
                 inputIdProveedor.value = data.IdProveedor
-                inputNit.value = data.Nit
+                // inputNit.value = data.Nit
                 inputNombreEmpresa.value = data.NombreEmpresa
                 inputNombreProveedor.value = data.NombreProveedor
                 inputProductoVender.value = data.ProductoVender
