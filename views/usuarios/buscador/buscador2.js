@@ -6,25 +6,18 @@
         var searchBar = document.querySelector('.light-table-filter');
         var rows = document.querySelectorAll('.table-id tbody tr');
         var generarFacturaBtn = document.querySelector('#generarFacturaBtn');
-        var generarFacturaSubmit = document.querySelector('#generarFacturaSubmit'); // Nuevo: Seleccionamos el botón oculto
         var buscarVentaForm = document.getElementById('buscarVentaForm');
+        var idVentaInput = document.getElementById('idVentaInput');
 
-        // Función para filtrar las filas de la tabla según el término de búsqueda
+        // Función para filtrar las filas de la tabla según el término de búsqueda en IdVenta
         searchBar.addEventListener('keyup', function(event) {
             var searchTerm = event.target.value.toLowerCase();
 
             rows.forEach(function(row) {
-                var cells = row.querySelectorAll('td');
-                var found = false;
+                var idVentaCell = row.querySelector('td:first-child'); // Asumimos que el IdVenta está en la primera celda
+                var text = idVentaCell.textContent.toLowerCase();
 
-                cells.forEach(function(cell) {
-                    var text = cell.textContent.toLowerCase();
-                    if (text.includes(searchTerm)) {
-                        found = true;
-                    }
-                });
-
-                if (found) {
+                if (text.includes(searchTerm)) {
                     row.style.display = '';
                 } else {
                     row.style.display = 'none';
@@ -32,14 +25,19 @@
             });
         });
 
-        // Función para enviar el formulario de búsqueda al hacer clic en el botón de generar factura
-        generarFacturaBtn.addEventListener('click', function() {
-            buscarVentaForm.submit();
+        // Evento para seleccionar una fila y obtener el IdVenta
+        rows.forEach(function(row) {
+            row.addEventListener('click', function() {
+                var idVenta = row.querySelector('td:first-child').textContent.trim(); // Primer hijo (primera celda)
+                idVentaInput.value = idVenta;
+            });
         });
+
+        // Función para enviar el formulario de búsqueda al hacer clic en el botón de generar factura
         generarFacturaBtn.addEventListener('click', function(event) {
             event.preventDefault();
             buscarVentaForm.submit();
         });
-    
+        
     });
 })();
