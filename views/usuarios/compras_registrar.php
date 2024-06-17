@@ -59,7 +59,6 @@ $empleado = $conn->query($queryEmpleado);
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Número Compra</th>
                 <th>Proveedor</th>
                 <th>Producto</th>
                 <th>Empleado</th>
@@ -75,7 +74,6 @@ $empleado = $conn->query($queryEmpleado);
         <?php while($rowCompras = $compras->fetch_assoc()) { ?>
             <tr>
                 <td><?=$rowCompras['IdCompra']; ?></td>
-                <td><?=$rowCompras['NumeroCompra']; ?></td>
                 <td><?=$rowCompras['NombreProveedor']; ?></td>
                 <td><?=$rowCompras['NombreProducto']; ?></td>
                 <td><?=$rowCompras['Empleado']; ?></td>
@@ -112,7 +110,6 @@ $empleado = $conn->query($queryEmpleado);
             let IdCompra = button.getAttribute('data-bs-id')
 
             let inputIdCompra = ModalEditarCompras.querySelector('.modal-body #IdCompra')
-            let inputNumeroCompra = ModalEditarCompras.querySelector('.modal-body #NumeroCompra')
             let inputIdProveedor = ModalEditarCompras.querySelector('.modal-body #proveedor')
             let inputIdProducto = ModalEditarCompras.querySelector('.modal-body #producto')
             let inputIdEmpleado = ModalEditarCompras.querySelector('.modal-body #Empleado')
@@ -135,7 +132,6 @@ $empleado = $conn->query($queryEmpleado);
             .then(data => {
 
                 inputIdCompra.value = data.IdCompra
-                inputNumeroCompra.value = data.NumeroCompra
                 inputIdProveedor.value = data.IdProveedor
                 inputIdProducto.value = data.IdProducto
                 inputIdEmpleado.value = data.IdEmpleado
