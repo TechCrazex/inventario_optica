@@ -7,11 +7,6 @@
       </div>
       <div class="modal-bodyy">
         <form action="registrarCompras2.php" method="POST" enctype="multipart/form-data">
-            
-            <div class="mb-3">
-                <label for="NumeroCompra">Número Compra: </label>
-                <input type="text" name="NumeroCompra" id="NumeroCompra" class="form-control" required>
-            </div>
 
             <div class="mb-3">
                 <label for="proveedor">Proveedor: </label>
@@ -33,7 +28,6 @@
                 </select>
             </div>
             
-            
             <div class="mb-3">
                 <label for="Empleado">Empleado: </label>
                 <select type="text" name="Empleado" id="Empleado" class="form-select" required>
@@ -53,7 +47,6 @@
                 <?php } ?>
                 </select>
             </div>
-
 
             <div class="mb-3">
                 <label for="CantidadComprada">Cantidad Comprada: </label>
@@ -114,5 +107,4 @@
     })
     .catch(error => console.error('Error:', error));
 });
-
 </script>
