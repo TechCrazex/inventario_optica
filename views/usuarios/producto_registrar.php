@@ -92,9 +92,8 @@
     <?php $Material->data_seek(0); ?>
     <?php include 'ModalEditarProductos.php'; ?>
 
-   <script>
+<script>
 let ModalEditarProductos = document.getElementById('ModalEditarProductos');
-let ModalEliminarProductos = document.getElementById('ModalEliminarProductos');
 
 ModalEditarProductos.addEventListener('shown.bs.modal', event => {
     let button = event.relatedTarget;
@@ -104,7 +103,6 @@ ModalEditarProductos.addEventListener('shown.bs.modal', event => {
     let inputNombreProducto = ModalEditarProductos.querySelector('.modal-body #NombreProducto');
     let inputDescripcion = ModalEditarProductos.querySelector('.modal-body #Descripcion');
     let inputIdProveedor = ModalEditarProductos.querySelector('.modal-body #IdProveedor');
-    let inputNombreProveedor = ModalEditarProductos.querySelector('.modal-body #NombreProveedor');
     let inputCantidadStock = ModalEditarProductos.querySelector('.modal-body #CantidadStock');
     let inputIdCategoria = ModalEditarProductos.querySelector('.modal-body #IdCategoria');
     let inputIdMarca = ModalEditarProductos.querySelector('.modal-body #IdMarca');
@@ -127,7 +125,6 @@ ModalEditarProductos.addEventListener('shown.bs.modal', event => {
             inputNombreProducto.value = data.NombreProducto || '';
             inputDescripcion.value = data.Descripcion || '';
             inputIdProveedor.value = data.IdProveedor || '';
-            inputNombreProveedor.value = data.NombreProveedor || '';
             inputCantidadStock.value = data.CantidadStock || '';
             inputIdCategoria.value = data.IdCategoria || '';
             inputIdMarca.value = data.IdMarca || '';
@@ -140,14 +137,13 @@ ModalEditarProductos.addEventListener('shown.bs.modal', event => {
     }).catch(err => console.log(err));
 });
 
+let ModalEliminarProductos = document.getElementById('ModalEliminarProductos');
 ModalEliminarProductos.addEventListener('shown.bs.modal', event => {
     let button = event.relatedTarget;
     let IdProducto = button.getAttribute('data-bs-id');
-    let inputIdProducto = ModalEliminarProductos.querySelector('.modal-footer #IdProducto');
-    inputIdProducto.value = IdProducto;
+    ModalEliminarProductos.querySelector('.modal-footer #IdProducto').value = IdProducto;
 });
 </script>
-
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
