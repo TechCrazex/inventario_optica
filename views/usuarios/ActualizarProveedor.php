@@ -3,7 +3,6 @@
 require '../../includes/conexionBD.php';
 
 $IdProveedor = $conn->real_escape_string($_POST['IdProveedor']);
-$Nit = $conn->real_escape_string($_POST['Nit']);
 $NombreEmpresa = $conn->real_escape_string($_POST['NombreEmpresa']);
 $NombreProveedor = $conn->real_escape_string($_POST['NombreProveedor']);
 $ProductoVender = $conn->real_escape_string($_POST['ProductoVender']);
@@ -14,7 +13,6 @@ $Correo = $conn->real_escape_string($_POST['Correo']);
 
 
 $sql = "UPDATE tblproveedores SET
-            Nit ='$Nit',
             NombreEmpresa = '$NombreEmpresa',
             NombreProveedor = '$NombreProveedor',
             ProductoVender = '$ProductoVender',
