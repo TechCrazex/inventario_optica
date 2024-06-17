@@ -1,18 +1,26 @@
 <?php
-// Conexión a la base de datos
 require '../../includes/conexionBD.php';
 
-$id = $conn->real_escape_string($_POST['IdVenta']);
+// Verifica que el IdVenta se recibió correctamente
+if (isset($_POST['IdVenta'])) {
+    $IdVenta = $conn->real_escape_string($_POST['IdVenta']);
 
-$sqlEditar = "SELECT IdVenta, NumeroVenta, IdCliente, IdEmpleado, IdProducto, CantidadVendida, PrecioUnidad, PrecioTotal, FechaVenta, Observación, IdCategoria FROM tblventas WHERE IdVenta=$id LIMIT 1";
-$resultado = $conn->query($sqlEditar);
-$rows = $resultado->num_rows;
+    // Prepara la consulta SQL para obtener la venta específica
+    $sql = "SELECT * FROM tblventas WHERE IdVenta = '$IdVenta'";
+    $result = $conn->query($sql);
 
-$ventas = [];
-
-if ($rows > 0) {
-    $ventas = $resultado->fetch_array();
+    // Verifica si se encontraron resultados
+    if ($result->num_rows > 0) {
+        // Obtiene los datos de la venta
+        $venta = $result->fetch_assoc();
+        // Devuelve los datos en formato JSON
+        echo json_encode($venta);
+    } else {
+        // Si no se encontró la venta, devuelve un mensaje de error
+        echo json_encode(["error" => "No se encontró la venta con el IdVenta proporcionado: $IdVenta"]);
+    }
+} else {
+    // Si no se recibió correctamente el IdVenta, devuelve un mensaje de error
+    echo json_encode(["error" => "No se proporcionó el IdVenta correctamente"]);
 }
-
-echo json_encode($ventas, JSON_UNESCAPED_UNICODE);
 ?>
