@@ -35,7 +35,7 @@ $queryCliente = "SELECT * FROM tblclientes";
 $cliente = $conn->query($queryCliente);
 ?>
 
-    <form action="historias_registrar.php" method="POST">
+    <form action="historias_registrar2.php" method="POST">
         <div class="tit-pri">
             <h1>Registro Historias Clínicas</h1>
                 <div>
