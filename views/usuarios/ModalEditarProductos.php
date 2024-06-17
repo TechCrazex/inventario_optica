@@ -40,11 +40,36 @@
                 <textarea type="text" name="Descripcion" id="Descripcion" rows="3" class="form-control" required></textarea>
             </div>
 
-            <div class="mb-3">
+<!--             <div class="mb-3">
                 <label for="IdProveedor">Proveedor Asociado: </label>
                 <input type="text" id="NombreProveedor" class="form-control" readonly>
-                <input type="hidden" name="IdProveedor" id="IdProveedor">
-            </div>
+                <select type="hidden" name="IdProveedor" id="IdProveedor">
+            </div> -->
+            <div class="mb-3">
+    <label for="IdProveedor">Proveedor Asociado: </label>
+    <select name="IdProveedor" id="IdProveedor" class="form-select" required>
+        <option value="">Seleccionar Proveedor...</option>
+        <?php
+        // Conectar a la base de datos
+        require '../../includes/conexionBD.php';
+
+        // Consulta para obtener los proveedores
+        $sql = "SELECT DISTINCT IdProveedor, NombreProveedor FROM tblproveedores WHERE NombreProveedor IS NOT NULL";
+
+        // Ejecutar la consulta
+        $result = $conn->query($sql);
+
+        // Verificar si hay resultados
+        if ($result->num_rows > 0) {
+            // Iterar sobre los resultados y generar las opciones del select
+            while($row = $result->fetch_assoc()) {
+                echo '<option value="' . $row["IdProveedor"] . '">' . $row["NombreProveedor"] . '</option>';
+            }
+        } 
+        ?>
+    </select>
+</div>
+         
             
 
             <div class="mb-3">
