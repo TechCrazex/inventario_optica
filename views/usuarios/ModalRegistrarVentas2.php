@@ -7,11 +7,6 @@
       </div>
       <div class="modal-bodyy">
         <form action="registrarVentas2.php" method="POST" enctype="multipart/form-data">
-        
-            <div class="mb-3">
-                <label for="NumeroVenta">Número Venta: </label>
-                <input type="text" name="NumeroVenta" id="NumeroVenta" class="form-control" required>
-            </div>
 
             <div class="mb-3">
                 <label for="cliente">Cliente: </label>
@@ -57,7 +52,7 @@
 
             <div class="mb-3">
                 <label for="FechaVenta">Fecha Venta: </label>
-                <input type="date" name="FechaVenta" id="FechaVenta" class="form-control" required>
+                <input type="date" name="FechaVenta" id="FechaVenta" class="form-control" max="<?= $fechaActual; ?>" required>
             </div>
 
             <div class="mb-3">
