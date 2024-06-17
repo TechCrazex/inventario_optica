@@ -7,7 +7,7 @@ if (!isset($_SESSION['Correo'])) {
 }
 ?>
 <?php require '../../includes/_db.php'; ?>
-<?php require '../../includes/_header.php'; ?>
+<?php require '../../includes/_header2.php'; ?>
 <?php 
 date_default_timezone_set('America/Bogota');
 $fechaActual = date('Y-m-d');
