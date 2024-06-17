@@ -2,7 +2,6 @@
 
 require '../../includes/conexionBD.php';
 
-$NumeroVenta = $conn->real_escape_string($_POST['NumeroVenta']);
 $IdCliente = $conn->real_escape_string($_POST['cliente']);
 $IdEmpleado = $conn->real_escape_string($_POST['empleado']);
 $IdProducto = $conn->real_escape_string($_POST['producto']);
@@ -14,8 +13,8 @@ $Observacion = $conn->real_escape_string($_POST['Observacion']);
 $Categoria = $conn->real_escape_string($_POST['Categoria']);
 
 // Insertar los datos en la tabla de ventas
-$sql = "INSERT INTO tblventas (NumeroVenta, IdCliente, IdEmpleado, IdProducto, CantidadVendida, PrecioUnidad, PrecioTotal, FechaVenta, Observación, IdCategoria) 
-    VALUES ('$NumeroVenta', '$IdCliente', '$IdEmpleado', '$IdProducto', '$CantidadVendida', '$PrecioUnidad', '$PrecioTotal', '$FechaVenta', '$Observacion', '$Categoria')";
+$sql = "INSERT INTO tblventas ( IdCliente, IdEmpleado, IdProducto, CantidadVendida, PrecioUnidad, PrecioTotal, FechaVenta, Observación, IdCategoria) 
+    VALUES ( '$IdCliente', '$IdEmpleado', '$IdProducto', '$CantidadVendida', '$PrecioUnidad', '$PrecioTotal', '$FechaVenta', '$Observacion', '$Categoria')";
 
 if ($conn->query($sql)) {
     $IdVenta = $conn->insert_id;
@@ -35,7 +34,8 @@ if ($conn->query($sql)) {
         $sqlUpdateStock = "UPDATE tblproductos SET CantidadStock = $nuevaCantidad WHERE IdProducto = '$IdProducto'";
         if ($conn->query($sqlUpdateStock)) {
             // Éxito al actualizar la cantidad en stock
-            echo 'registrado';
+            header('Location: venta_registrar.php');
+            exit;
         } else {
             // Error al actualizar la cantidad en stock
             echo 'Error al actualizar la cantidad en stock: ' . $conn->error;
