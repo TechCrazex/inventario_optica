@@ -34,7 +34,7 @@
                                     <div id="register-link" class="text-right">
                                         <br>
                                         <!-- <a href="registros.php"><input type="button"  class="btn btn-primary space" value="registrarse"></a> -->
-                                        <a href="recuperar_contraseña.php" class="btn btn-link" style="color: #ffffff;">¿Olvidaste tu contraseña?</a>
+                                        <a href="forgot_password.php" class="btn btn-link" style="color: #ffffff;">¿Olvidaste tu contraseña?</a>
                                     </div>
                                 </div>
                             </form>
