@@ -49,11 +49,11 @@ $empleado = $conn->query($queryEmpleado);
                 </div>
         </div>
     </form>
-    <form action="../../views/usuarios/generar_info_compra.php" method="post" target="_blank">
+    <!-- <form action="../../views/usuarios/generar_info_compra.php" method="post" target="_blank">
         <div class="col-auto">
             <button class="btn btn-primary" type="submit" name="generar_informe" value="ventas">Generar informe</button>    
         </div>
-    </form>
+    </form> -->
 
     <table class="table-id">
         <thead>
