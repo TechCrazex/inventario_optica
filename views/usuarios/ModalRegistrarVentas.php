@@ -8,6 +8,10 @@
       <div class="modal-bodyy">
         <form action="registrarVentas2.php" method="POST" enctype="multipart/form-data">
         
+            <div class="mb-3">
+                <label for="NumeroVenta">Número Venta: </label>
+                <input type="text" name="NumeroVenta" id="NumeroVenta" class="form-control" required>
+            </div>
 
             <div class="mb-3">
                 <label for="cliente">Cliente: </label>
@@ -52,13 +56,8 @@
             <input type="hidden" id="PrecioTotal" name="PrecioTotal">
 
             <div class="mb-3">
-<!--                 <label for="FechaVenta">Fecha Venta: </label>
-                <input type="date" name="FechaVenta" id="FechaVenta" class="form-control" required> -->
-              <form>
-                 <label for="FechaVenta">Fecha de Venta:</label>
-                  <input type="date" name="FechaVenta" id="FechaVenta" class="form-control" required>
-               </form>
-              
+                <label for="FechaVenta">Fecha Venta: </label>
+                <input type="date" name="FechaVenta" id="FechaVenta" class="form-control" required>
             </div>
 
             <div class="mb-3">
@@ -112,21 +111,4 @@
     })
     .catch(error => console.error('Error:', error));
 });
-</script>
-
-<script>
-    // Obtener el elemento de fecha de venta
-    const fechaVentaInput = document.getElementById('FechaVenta');
-
-    // Obtener la fecha actual en formato YYYY-MM-DD
-    const fechaActual = new Date();
-
-    // Convertir la fecha actual a las 00:00:00 horas para incluir todo el día actual
-    fechaActual.setHours(0, 0, 0, 0);
-
-    // Formatear la fecha actual como YYYY-MM-DD
-    const fechaMinima = fechaActual.toISOString().split('T')[0];
-
-    // Establecer el atributo max en el input de fecha para limitar fechas futuras
-    fechaVentaInput.setAttribute('max', fechaMinima);
 </script>
