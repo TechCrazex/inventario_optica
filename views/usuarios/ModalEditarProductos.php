@@ -15,22 +15,14 @@
                 <select type="text" name="NombreProducto" id="NombreProducto" class="form-select" required>
                     <option value="">Seleccionar Producto...</option>
                     <?php
-                    // Conectar a la base de datos
                     require '../../includes/conexionBD.php';
-
-                    // Consulta para obtener los productos de los proveedores
                     $sql = "SELECT DISTINCT ProductoVender FROM tblproveedores WHERE ProductoVender IS NOT NULL";
-
-                    // Ejecutar la consulta
                     $result = $conn->query($sql);
-
-                    // Verificar si hay resultados
                     if ($result->num_rows > 0) {
-                        // Iterar sobre los resultados y generar las opciones del select
                         while($row = $result->fetch_assoc()) {
                             echo '<option value="' . $row["ProductoVender"] . '">' . $row["ProductoVender"] . '</option>';
                         }
-                    } 
+                    }
                     ?>
                 </select>
             </div>
@@ -40,37 +32,22 @@
                 <textarea type="text" name="Descripcion" id="Descripcion" rows="3" class="form-control" required></textarea>
             </div>
 
-<!--             <div class="mb-3">
-                <label for="IdProveedor">Proveedor Asociado: </label>
-                <input type="text" id="NombreProveedor" class="form-control" readonly>
-                <select type="hidden" name="IdProveedor" id="IdProveedor">
-            </div> -->
             <div class="mb-3">
               <label for="IdProveedor">Proveedor Asociado: </label>
               <select name="IdProveedor" id="IdProveedor" class="form-select" required>
               <option value="">Seleccionar Proveedor...</option>
               <?php
-              // Conectar a la base de datos
               require '../../includes/conexionBD.php';
-
-              // Consulta para obtener los proveedores
               $sql = "SELECT DISTINCT IdProveedor, NombreProveedor FROM tblproveedores WHERE NombreProveedor IS NOT NULL";
-
-              // Ejecutar la consulta
               $result = $conn->query($sql);
-
-               // Verificar si hay resultados
               if ($result->num_rows > 0) {
-                // Iterar sobre los resultados y generar las opciones del select
                   while($row = $result->fetch_assoc()) {
                     echo '<option value="' . $row["IdProveedor"] . '">' . $row["NombreProveedor"] . '</option>';
                   }
-                 } 
-               ?>
-            </select>
-          </div>
-         
-            
+              }
+              ?>
+              </select>
+            </div>
 
             <div class="mb-3">
                 <label for="CantidadStock">Cantidad Stock: </label>
@@ -81,9 +58,9 @@
                 <label for="IdCategoria">Categoria: </label>
                 <select type="text" name="IdCategoria" id="IdCategoria" class="form-select" required>
                 <option value="">Seleccionar Categoria ...</option>
-                <?php while($rowCategoria  = $Categoria ->fetch_assoc()) { ?>
-                        <option value="<?php echo $rowCategoria ["IdCategoria"]; ?>"><?= $rowCategoria ["Categoria"] ?></option>
-                        <?php } ?>
+                <?php while($rowCategoria = $Categoria->fetch_assoc()) { ?>
+                    <option value="<?php echo $rowCategoria["IdCategoria"]; ?>"><?= $rowCategoria["Categoria"] ?></option>
+                <?php } ?>
                 </select>
             </div>
 
@@ -91,9 +68,9 @@
                 <label for="IdMarca">Marca: </label>
                 <select type="text" name="IdMarca" id="IdMarca" class="form-select" required>
                 <option value="">Seleccionar Marca ...</option>
-                <?php while($rowMarca  = $Marca ->fetch_assoc()) { ?>
-                        <option value="<?php echo $rowMarca ["IdMarca"]; ?>"><?= $rowMarca ["Marca"] ?></option>
-                        <?php } ?>
+                <?php while($rowMarca = $Marca->fetch_assoc()) { ?>
+                    <option value="<?php echo $rowMarca["IdMarca"]; ?>"><?= $rowMarca["Marca"] ?></option>
+                <?php } ?>
                 </select>
             </div>
 
@@ -111,20 +88,21 @@
                 <label for="IdMaterial">Material: </label>
                 <select type="text" name="IdMaterial" id="IdMaterial" class="form-select" required>
                 <option value="">Seleccionar Material ...</option>
-                <?php while($rowMaterial  = $Material ->fetch_assoc()) { ?>
-                        <option value="<?php echo $rowMaterial ["IdMaterial"]; ?>"><?= $rowMaterial ["Material"] ?></option>
-                        <?php } ?>
+                <?php while($rowMaterial = $Material->fetch_assoc()) { ?>
+                    <option value="<?php echo $rowMaterial["IdMaterial"]; ?>"><?= $rowMaterial["Material"] ?></option>
+                <?php } ?>
                 </select>
             </div>
 
-            <div class="">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary">Guardar</button>
+            <div>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
             </div>
         </form>
       </div>
     </div>
   </div>
 </div>
+
 
 
