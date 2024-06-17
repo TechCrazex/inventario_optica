@@ -8,10 +8,6 @@
       <div class="modal-bodyy">
         <form action="registrarVentas2.php" method="POST" enctype="multipart/form-data">
         
-            <div class="mb-3">
-                <label for="NumeroVenta">Número Venta: </label>
-                <input type="text" name="NumeroVenta" id="NumeroVenta" class="form-control" required>
-            </div>
 
             <div class="mb-3">
                 <label for="cliente">Cliente: </label>
