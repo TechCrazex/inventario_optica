@@ -52,8 +52,13 @@
             <input type="hidden" id="PrecioTotal" name="PrecioTotal">
 
             <div class="mb-3">
-                <label for="FechaVenta">Fecha Venta: </label>
-                <input type="date" name="FechaVenta" id="FechaVenta" class="form-control" required>
+<!--                 <label for="FechaVenta">Fecha Venta: </label>
+                <input type="date" name="FechaVenta" id="FechaVenta" class="form-control" required> -->
+              <form>
+                 <label for="FechaVenta">Fecha de Venta:</label>
+                  <input type="date" name="FechaVenta" id="FechaVenta" class="form-control" required>
+               </form>
+              
             </div>
 
             <div class="mb-3">
@@ -107,4 +112,19 @@
     })
     .catch(error => console.error('Error:', error));
 });
+</script>
+
+<script>
+    // Obtener el elemento de fecha de venta
+    const fechaVentaInput = document.getElementById('FechaVenta');
+
+    // Obtener la fecha actual en formato YYYY-MM-DD
+    const fechaActual = new Date();
+    fechaActual.setDate(fechaActual.getDate() - 1); // Restar un día a la fecha actual
+
+    // Formatear la fecha actual como YYYY-MM-DD
+    const fechaMinima = fechaActual.toISOString().split('T')[0];
+
+    // Establecer el atributo min en el input de fecha para limitar fechas futuras
+    fechaVentaInput.setAttribute('min', fechaMinima);
 </script>
