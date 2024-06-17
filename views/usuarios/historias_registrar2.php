@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 if (!isset($_SESSION['Correo'])) {
@@ -5,10 +6,14 @@ if (!isset($_SESSION['Correo'])) {
     exit();
 }
 ?>
+<?php require '../../includes/_db.php'; ?>
+<?php require '../../includes/_header.php'; ?>
+<?php 
+date_default_timezone_set('America/Bogota');
+$fechaActual = date('Y-m-d');
+?>
 <!DOCTYPE html>
 <html lang="en">
-<?php require '../../includes/_db.php'; ?>
-<?php require '../../includes/_header2.php'; ?>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <link rel="stylesheet" href="../../css/Style.css">
     <!-- Bootstrao iconos PNG -->
@@ -30,9 +35,9 @@ $queryCliente = "SELECT * FROM tblclientes";
 $cliente = $conn->query($queryCliente);
 ?>
 
-    <form action="historias_registrar2.php" method="POST">
+    <form action="historias_registrar.php" method="POST">
         <div class="tit-pri">
-            <h1>Registro Historias Clinicas</h1>
+            <h1>Registro Historias Clínicas</h1>
                 <div>
                     <input type="text" class="light-table-filter" data-table="table-id" placeholder="Buscar...">
                 </div>
@@ -49,7 +54,7 @@ $cliente = $conn->query($queryCliente);
                 <th>Cliente</th>
                 <th>Fecha</th>
                 <th>Antecedentes</th>
-                <th>Descripcion</th>
+                <th>Descripción</th>
             </tr>
         </thead>
         <tbody>
@@ -72,10 +77,10 @@ $cliente = $conn->query($queryCliente);
 
     </table>
 
-    <?php include 'ModalRegistrarHistorias2.php';  ?>
-    <?php include 'ModalEliminarHistorias2.php';  ?>
+    <?php include 'ModalRegistrarHistorias.php';  ?>
+    <?php include 'ModalEliminarHistorias.php';  ?>
     <?php $cliente->data_seek(0); ?>
-    <?php include 'ModalEditarHistorias2.php';  ?>
+    <?php include 'ModalEditarHistorias.php';  ?>
 
     <script>
         let ModalEditarHistorias = document.getElementById('ModalEditarHistorias')
@@ -92,7 +97,7 @@ $cliente = $conn->query($queryCliente);
             let inputAntecedentes = ModalEditarHistorias.querySelector('.modal-body #Antecedentes')
             let inputDescripcion = ModalEditarHistorias.querySelector('.modal-body #Descripcion')
 
-            let url = "editarHistorias2.php"
+            let url = "editarHistorias.php"
             let formData = new FormData();
             formData.append('IdHistoriaClinica', IdHistoriaClinica);
 // Agrega otras líneas para los demás campos del formulario
