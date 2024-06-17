@@ -81,55 +81,52 @@ if (!isset($_SESSION['Correo'])) {
     <?php include 'ModalEliminarProveedor.php'; ?>
     <?php include 'ModalEditarProveedores.php'; ?>
 
-    <script>
-        let ModalEditarProveedores = document.getElementById('ModalEditarProveedores')
-        let ModalEliminarProveedor = document.getElementById('ModalEliminarProveedor')
+ <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let ModalEditarProveedores = document.getElementById('ModalEditarProveedores');
+        let ModalEliminarProveedor = document.getElementById('ModalEliminarProveedor');
 
         ModalEditarProveedores.addEventListener('shown.bs.modal', event => {
-            let button = event.relatedTarget
-            let IdProveedor = button.getAttribute('data-bs-id')
+            let button = event.relatedTarget;
+            let IdProveedor = button.getAttribute('data-bs-id');
 
-            let inputIdProveedor = ModalEditarProveedores.querySelector('.modal-body #IdProveedor')
-            // let inputNit = ModalEditarProveedores.querySelector('.modal-body #Nit')
-            let inputNombreEmpresa = ModalEditarProveedores.querySelector('.modal-body #NombreEmpresa')
-            let inputNombreProveedor = ModalEditarProveedores.querySelector('.modal-body #NombreProveedor')
-            let inputProductoVender = ModalEditarProveedores.querySelector('.modal-body #ProductoVender')
-            let inputDireccion = ModalEditarProveedores.querySelector('.modal-body #Direccion')
-            let inputTelefono = ModalEditarProveedores.querySelector('.modal-body #Telefono')
-            let inputMarca = ModalEditarProveedores.querySelector('.modal-body #Marca')
-            let inputCorreo = ModalEditarProveedores.querySelector('.modal-body #Correo')
+            let inputIdProveedor = ModalEditarProveedores.querySelector('.modal-body #IdProveedor');
+            let inputNombreEmpresa = ModalEditarProveedores.querySelector('.modal-body #NombreEmpresa');
+            let inputNombreProveedor = ModalEditarProveedores.querySelector('.modal-body #NombreProveedor');
+            let inputProductoVender = ModalEditarProveedores.querySelector('.modal-body #ProductoVender');
+            let inputDireccion = ModalEditarProveedores.querySelector('.modal-body #Direccion');
+            let inputTelefono = ModalEditarProveedores.querySelector('.modal-body #Telefono');
+            let inputCorreo = ModalEditarProveedores.querySelector('.modal-body #Correo');
 
-            let url = "editarProveedores.php"
+            let url = "editarProveedores.php";
             let formData = new FormData();
             formData.append('IdProveedor', IdProveedor);
-// Agrega otras líneas para los demás campos del formulario
 
-
-            fetch(url,{
+            fetch(url, {
                 method: "POST",
                 body: formData
-            }).then(response => response.json())
+            })
+            .then(response => response.json())
             .then(data => {
-
-                inputIdProveedor.value = data.IdProveedor
-                // inputNit.value = data.Nit
-                inputNombreEmpresa.value = data.NombreEmpresa
-                inputNombreProveedor.value = data.NombreProveedor
-                inputProductoVender.value = data.ProductoVender
-                inputDireccion.value = data.Direccion
-                inputTelefono.value = data.Telefono
-                inputCorreo.value = data.Correo
-
-            }).catch(err => console.log(err))
-
-        })
+                inputIdProveedor.value = data.IdProveedor;
+                inputNombreEmpresa.value = data.NombreEmpresa;
+                inputNombreProveedor.value = data.NombreProveedor;
+                inputProductoVender.value = data.ProductoVender;
+                inputDireccion.value = data.Direccion;
+                inputTelefono.value = data.Telefono;
+                inputCorreo.value = data.Correo;
+            })
+            .catch(err => console.error('Error fetching data:', err));
+        });
 
         ModalEliminarProveedor.addEventListener('shown.bs.modal', event => {
-            let button = event.relatedTarget
-            let IdProveedor = button.getAttribute('data-bs-id')
-            ModalEliminarProveedor.querySelector('.modal-footeer #IdProveedor').value = IdProveedor
-        })
-    </script>
+            let button = event.relatedTarget;
+            let IdProveedor = button.getAttribute('data-bs-id');
+            ModalEliminarProveedor.querySelector('.modal-footeer #IdProveedor').value = IdProveedor;
+        });
+    });
+</script>
+
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="buscador/buscador.js"></script>
