@@ -29,7 +29,7 @@
             </div>
             
             <div class="mb-3">
-                <label for="Empleado">Empleado: </label>
+                <label for="Empleado">Administrador: </label>
                 <select type="text" name="Empleado" id="Empleado" class="form-select" required>
                 <option value="">Seleccionar Empleado...</option>
                 <?php 
