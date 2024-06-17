@@ -3,7 +3,6 @@
 require '../../includes/conexionBD.php';
 
 $IdCompra = $conn->real_escape_string($_POST['IdCompra']);
-$NumeroCompra = $conn->real_escape_string($_POST['NumeroCompra']);
 $IdProveedor = $conn->real_escape_string($_POST['proveedor']);
 $IdProducto = $conn->real_escape_string($_POST['producto']);
 $IdEmpleado = $conn->real_escape_string($_POST['Empleado']);
@@ -16,7 +15,6 @@ $Observacion = $conn->real_escape_string($_POST['Observacion']);
 $PrecioTotal = $CantidadComprada * $PrecioUnidad;
 
 $sql = "UPDATE tblcompras SET
-            NumeroCompra ='$NumeroCompra',
             IdProveedor = '$IdProveedor',
             IdProducto = '$IdProducto',
             IdEmpleado = '$IdEmpleado',
