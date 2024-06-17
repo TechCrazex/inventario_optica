@@ -38,7 +38,7 @@ $cliente = $conn->query($queryCliente);
 $queryCategorias = "SELECT * FROM tblcategoriasproductos";
 $categorias = $conn->query($queryCategorias);
 
-$queryEmpleado = "SELECT * FROM tblempleados";
+$queryEmpleado = "SELECT * FROM tblempleados WHERE IdRol = 2";
 $empleado = $conn->query($queryEmpleado);
 ?>
 
