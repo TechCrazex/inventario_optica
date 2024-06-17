@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
     <?php require '../../includes/_db.php' ?>
@@ -111,49 +112,43 @@
             let inputPrecioVenta = ModalEditarProductos.querySelector('.modal-body #PrecioVenta')
             let inputIdMaterial = ModalEditarProductos.querySelector('.modal-body #IdMaterial')
 
-            // Verifica que los elementos existan antes de intentar establecer sus valores
-            if (!inputIdProducto || !inputNombreProducto || !inputDescripcion || !inputIdProveedor || !inputNombreProveedor || !inputCantidadStock || !inputIdCategoria || !inputIdMarca || !inputPrecioCompra || !inputPrecioVenta || !inputIdMaterial) {
-                console.error('No se encontraron algunos de los elementos del formulario.');
-                return;
-            }
-
             let url = "editarProductos.php"
             let formData = new FormData();
             formData.append('IdProducto', IdProducto);
+// Agrega otras líneas para los demás campos del formulario
+
 
             fetch(url,{
                 method: "POST",
                 body: formData
             }).then(response => response.json())
             .then(data => {
-                inputIdProducto.value = data.IdProducto || '';
-                inputNombreProducto.value = data.NombreProducto || '';
-                inputDescripcion.value = data.Descripcion || '';
-                inputIdProveedor.value = data.IdProveedor || '';
-                inputNombreProveedor.value = data.NombreProveedor || '';
-                inputCantidadStock.value = data.CantidadStock || '';
-                inputIdCategoria.value = data.IdCategoria || '';
-                inputIdMarca.value = data.IdMarca || '';
-                inputPrecioCompra.value = data.PrecioCompra || '';
-                inputPrecioVenta.value = data.PrecioVenta || '';
-                inputIdMaterial.value = data.IdMaterial || '';
+
+                inputIdProducto.value = data.IdProducto
+                inputNombreProducto.value = data.NombreProducto
+                inputDescripcion.value = data.Descripcion
+                inputIdProveedor.value = data.IdProveedor
+                inputNombreProveedor.value = data.NombreProveedor
+                inputCantidadStock.value = data.CantidadStock
+                inputIdCategoria.value = data.IdCategoria
+                inputIdMarca.value = data.IdMarca
+                inputPrecioCompra.value = data.PrecioCompra
+                inputPrecioVenta.value = data.PrecioVenta
+                inputIdMaterial.value = data.IdMaterial
+            
             }).catch(err => console.log(err))
+            
+            
+
         })
 
         ModalEliminarProductos.addEventListener('shown.bs.modal', event => {
             let button = event.relatedTarget
             let IdProducto = button.getAttribute('data-bs-id')
-            let inputIdProducto = ModalEliminarProductos.querySelector('.modal-footer #IdProducto');
-
-            // Verifica que el elemento exista antes de intentar establecer su valor
-            if (!inputIdProducto) {
-                console.error('No se encontró el elemento #IdProducto en el modal de eliminación.');
-                return;
-            }
-
-            inputIdProducto.value = IdProducto;
+            ModalEliminarProductos.querySelector('.modal-footer #IdProducto').value = IdProducto
         })
     </script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="buscador/buscador.js"></script>
