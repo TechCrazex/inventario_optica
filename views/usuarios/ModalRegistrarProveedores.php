@@ -9,10 +9,6 @@
                 <form action="ActualizarProveedor.php" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="IdProveedor" id="IdProveedor">
                     <div class="mb-3">
-                        <label for="Nit">Nit: </label>
-                        <input type="text" name="Nit" id="Nit" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
                         <label for="NombreEmpresa">Nombre Empresa: </label>
                         <input type="text" name="NombreEmpresa" id="NombreEmpresa" class="form-control" required>
                     </div>
