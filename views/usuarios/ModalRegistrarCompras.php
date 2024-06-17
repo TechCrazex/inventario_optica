@@ -31,7 +31,7 @@
             <div class="mb-3">
                 <label for="Empleado">Administrador: </label>
                 <select type="text" name="Empleado" id="Empleado" class="form-select" required>
-                <option value="">Seleccionar Empleado...</option>
+                <option value="">Seleccionar Administrador...</option>
                 <?php 
                     // Consulta para obtener los empleados con rol de administrador
                     $sqlEmpleados = "SELECT IdEmpleado, Nombres, Apellidos FROM tblempleados WHERE IdRol = '1'";
