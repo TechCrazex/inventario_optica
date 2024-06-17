@@ -119,12 +119,8 @@
     const fechaVentaInput = document.getElementById('FechaVenta');
 
     // Obtener la fecha actual en formato YYYY-MM-DD
-    const fechaActual = new Date();
-    fechaActual.setDate(fechaActual.getDate() - 1); // Restar un día a la fecha actual
+    const fechaActual = new Date().toISOString().split('T')[0];
 
-    // Formatear la fecha actual como YYYY-MM-DD
-    const fechaMinima = fechaActual.toISOString().split('T')[0];
-
-    // Establecer el atributo min en el input de fecha para limitar fechas futuras
-    fechaVentaInput.setAttribute('min', fechaMinima);
+    // Establecer el atributo max en el input de fecha para limitar fechas futuras
+    fechaVentaInput.setAttribute('max', fechaActual);
 </script>
