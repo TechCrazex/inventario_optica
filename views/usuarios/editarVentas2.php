@@ -1,18 +1,26 @@
 <?php
-// Conexión a la base de datos
 require '../../includes/conexionBD.php';
 
-$id = $conn->real_escape_string($_POST['IdVenta']);
+// Verifica que el IdCompra se recibió correctamente
+if (isset($_POST['IdCompra'])) {
+    $IdCompra = $conn->real_escape_string($_POST['IdCompra']);
 
-$sqlEditar = "SELECT IdVenta, NumeroVenta, IdCliente, IdEmpleado, IdProducto, CantidadVendida, PrecioUnidad, PrecioTotal, FechaVenta, Observación, IdCategoria FROM tblventas WHERE IdVenta=$id LIMIT 1";
-$resultado = $conn->query($sqlEditar);
-$rows = $resultado->num_rows;
+    // Prepara la consulta SQL para obtener la compra específica
+    $sql = "SELECT * FROM tblcompras WHERE IdCompra = '$IdCompra'";
+    $result = $conn->query($sql);
 
-$ventas = [];
-
-if ($rows > 0) {
-    $ventas = $resultado->fetch_array();
+    // Verifica si se encontraron resultados
+    if ($result->num_rows > 0) {
+        // Obtiene los datos de la compra
+        $compra = $result->fetch_assoc();
+        // Devuelve los datos en formato JSON
+        echo json_encode($compra);
+    } else {
+        // Si no se encontró la compra, devuelve un mensaje de error
+        echo json_encode(["error" => "No se encontró la compra con el IdCompra proporcionado: $IdCompra"]);
+    }
+} else {
+    // Si no se recibió correctamente el IdCompra, devuelve un mensaje de error
+    echo json_encode(["error" => "No se proporcionó el IdCompra correctamente"]);
 }
-
-echo json_encode($ventas, JSON_UNESCAPED_UNICODE);
 ?>
