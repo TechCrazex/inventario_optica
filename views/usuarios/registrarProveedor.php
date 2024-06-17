@@ -59,7 +59,6 @@ if (!isset($_SESSION['Correo'])) {
         <?php while($rowProveedores = $proveedores->fetch_assoc()) { ?>
             <tr>
                 <td><?=$rowProveedores['IdProveedor']; ?></td>
-                <!--<td><?=$rowProveedores['Nit']; ?></td>-->
                 <td><?=$rowProveedores['NombreEmpresa']; ?></td>
                 <td><?=$rowProveedores['NombreProveedor']; ?></td>
                 <td><?=$rowProveedores['ProductoVender']; ?></td>
