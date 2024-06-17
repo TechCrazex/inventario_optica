@@ -92,62 +92,62 @@
     <?php $Material->data_seek(0); ?>
     <?php include 'ModalEditarProductos.php'; ?>
 
-    <script>
-        let ModalEditarProductos = document.getElementById('ModalEditarProductos')
-        let ModalEliminarProductos = document.getElementById('ModalEliminarProductos')
+   <script>
+let ModalEditarProductos = document.getElementById('ModalEditarProductos');
+let ModalEliminarProductos = document.getElementById('ModalEliminarProductos');
 
-        ModalEditarProductos.addEventListener('shown.bs.modal', event => {
-            let button = event.relatedTarget
-            let IdProducto = button.getAttribute('data-bs-id')
+ModalEditarProductos.addEventListener('shown.bs.modal', event => {
+    let button = event.relatedTarget;
+    let IdProducto = button.getAttribute('data-bs-id');
 
-            let inputIdProducto = ModalEditarProductos.querySelector('.modal-body #IdProducto')
-            let inputNombreProducto = ModalEditarProductos.querySelector('.modal-body #NombreProducto')
-            let inputDescripcion = ModalEditarProductos.querySelector('.modal-body #Descripcion')
-            let inputIdProveedor = ModalEditarProductos.querySelector('.modal-body #IdProveedor')
-            let inputNombreProveedor = ModalEditarProductos.querySelector('.modal-body #NombreProveedor');
-            let inputCantidadStock = ModalEditarProductos.querySelector('.modal-body #CantidadStock')
-            let inputIdCategoria = ModalEditarProductos.querySelector('.modal-body #IdCategoria')
-            let inputIdMarca = ModalEditarProductos.querySelector('.modal-body #IdMarca')
-            let inputPrecioCompra = ModalEditarProductos.querySelector('.modal-body #PrecioCompra')
-            let inputPrecioVenta = ModalEditarProductos.querySelector('.modal-body #PrecioVenta')
-            let inputIdMaterial = ModalEditarProductos.querySelector('.modal-body #IdMaterial')
+    let inputIdProducto = ModalEditarProductos.querySelector('.modal-body #IdProducto');
+    let inputNombreProducto = ModalEditarProductos.querySelector('.modal-body #NombreProducto');
+    let inputDescripcion = ModalEditarProductos.querySelector('.modal-body #Descripcion');
+    let inputIdProveedor = ModalEditarProductos.querySelector('.modal-body #IdProveedor');
+    let inputNombreProveedor = ModalEditarProductos.querySelector('.modal-body #NombreProveedor');
+    let inputCantidadStock = ModalEditarProductos.querySelector('.modal-body #CantidadStock');
+    let inputIdCategoria = ModalEditarProductos.querySelector('.modal-body #IdCategoria');
+    let inputIdMarca = ModalEditarProductos.querySelector('.modal-body #IdMarca');
+    let inputPrecioCompra = ModalEditarProductos.querySelector('.modal-body #PrecioCompra');
+    let inputPrecioVenta = ModalEditarProductos.querySelector('.modal-body #PrecioVenta');
+    let inputIdMaterial = ModalEditarProductos.querySelector('.modal-body #IdMaterial');
 
-            let url = "editarProductos.php"
-            let formData = new FormData();
-            formData.append('IdProducto', IdProducto);
-// Agrega otras líneas para los demás campos del formulario
+    let url = "editarProductos.php";
+    let formData = new FormData();
+    formData.append('IdProducto', IdProducto);
 
+    fetch(url, {
+        method: "POST",
+        body: formData
+    }).then(response => response.json())
+    .then(data => {
+        console.log(data); // Añadir para depuración
+        if (data) {
+            inputIdProducto.value = data.IdProducto || '';
+            inputNombreProducto.value = data.NombreProducto || '';
+            inputDescripcion.value = data.Descripcion || '';
+            inputIdProveedor.value = data.IdProveedor || '';
+            inputNombreProveedor.value = data.NombreProveedor || '';
+            inputCantidadStock.value = data.CantidadStock || '';
+            inputIdCategoria.value = data.IdCategoria || '';
+            inputIdMarca.value = data.IdMarca || '';
+            inputPrecioCompra.value = data.PrecioCompra || '';
+            inputPrecioVenta.value = data.PrecioVenta || '';
+            inputIdMaterial.value = data.IdMaterial || '';
+        } else {
+            console.error('Datos no encontrados');
+        }
+    }).catch(err => console.log(err));
+});
 
-            fetch(url,{
-                method: "POST",
-                body: formData
-            }).then(response => response.json())
-            .then(data => {
+ModalEliminarProductos.addEventListener('shown.bs.modal', event => {
+    let button = event.relatedTarget;
+    let IdProducto = button.getAttribute('data-bs-id');
+    let inputIdProducto = ModalEliminarProductos.querySelector('.modal-footer #IdProducto');
+    inputIdProducto.value = IdProducto;
+});
+</script>
 
-                inputIdProducto.value = data.IdProducto
-                inputNombreProducto.value = data.NombreProducto
-                inputDescripcion.value = data.Descripcion
-                inputIdProveedor.value = data.IdProveedor
-                inputNombreProveedor.value = data.NombreProveedor
-                inputCantidadStock.value = data.CantidadStock
-                inputIdCategoria.value = data.IdCategoria
-                inputIdMarca.value = data.IdMarca
-                inputPrecioCompra.value = data.PrecioCompra
-                inputPrecioVenta.value = data.PrecioVenta
-                inputIdMaterial.value = data.IdMaterial
-            
-            }).catch(err => console.log(err))
-            
-            
-
-        })
-
-        ModalEliminarProductos.addEventListener('shown.bs.modal', event => {
-            let button = event.relatedTarget
-            let IdProducto = button.getAttribute('data-bs-id')
-            ModalEliminarProductos.querySelector('.modal-footer #IdProducto').value = IdProducto
-        })
-    </script>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
