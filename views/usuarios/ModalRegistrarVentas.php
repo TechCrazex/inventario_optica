@@ -52,7 +52,7 @@
 
             <div class="mb-3">
                 <label for="FechaVenta">Fecha Venta: </label>
-                <input type="date" name="FechaVenta" id="FechaVenta" class="form-control" required>
+                <input type="date" name="FechaVenta" id="FechaVenta" class="form-control" max="<?= $fechaActual; ?>" required>
             </div>
 
             <div class="mb-3">
