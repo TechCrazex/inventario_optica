@@ -1,5 +1,4 @@
 <?php
-
 require '../../includes/conexionBD.php';
 
 $IdCliente = $conn->real_escape_string($_POST['cliente']);
@@ -12,43 +11,62 @@ $FechaVenta = $conn->real_escape_string($_POST['FechaVenta']);
 $Observacion = $conn->real_escape_string($_POST['Observacion']);
 $Categoria = $conn->real_escape_string($_POST['Categoria']);
 
-// Insertar los datos en la tabla de ventas
-$sql = "INSERT INTO tblventas ( IdCliente, IdEmpleado, IdProducto, CantidadVendida, PrecioUnidad, PrecioTotal, FechaVenta, Observación, IdCategoria) 
-    VALUES ( '$IdCliente', '$IdEmpleado', '$IdProducto', '$CantidadVendida', '$PrecioUnidad', '$PrecioTotal', '$FechaVenta', '$Observacion', '$Categoria')";
+// Consulta para obtener empleados con IdRol igual a 2
+$sqlEmpleados = "SELECT IdEmpleado FROM tblempleados WHERE IdRol = 2";
+$resultEmpleados = $conn->query($sqlEmpleados);
 
-if ($conn->query($sql)) {
-    $IdVenta = $conn->insert_id;
+if ($resultEmpleados->num_rows > 0) {
+    $empleadosPermitidos = [];
+    while ($row = $resultEmpleados->fetch_assoc()) {
+        $empleadosPermitidos[] = $row['IdEmpleado'];
+    }
 
-    // Consulta para obtener la cantidad actual en stock del producto
-    $sqlStock = "SELECT CantidadStock FROM tblproductos WHERE IdProducto = '$IdProducto'";
-    $resultStock = $conn->query($sqlStock);
+    // Verificar si el empleado seleccionado está en la lista permitida
+    if (!in_array($IdEmpleado, $empleadosPermitidos)) {
+        echo "El empleado seleccionado no tiene el rol permitido para registrar ventas.";
+        exit;
+    }
 
-    if ($resultStock->num_rows > 0) {
-        $rowStock = $resultStock->fetch_assoc();
-        $cantidadActual = $rowStock['CantidadStock'];
-        
-        // Calcular la nueva cantidad en stock restando la cantidad vendida
-        $nuevaCantidad = $cantidadActual - $CantidadVendida;
+    // Insertar los datos en la tabla de ventas
+    $sql = "INSERT INTO tblventas (IdCliente, IdEmpleado, IdProducto, CantidadVendida, PrecioUnidad, PrecioTotal, FechaVenta, Observación, IdCategoria) 
+            VALUES ('$IdCliente', '$IdEmpleado', '$IdProducto', '$CantidadVendida', '$PrecioUnidad', '$PrecioTotal', '$FechaVenta', '$Observacion', '$Categoria')";
 
-        // Actualizar la cantidad en stock en la tabla de productos
-        $sqlUpdateStock = "UPDATE tblproductos SET CantidadStock = $nuevaCantidad WHERE IdProducto = '$IdProducto'";
-        if ($conn->query($sqlUpdateStock)) {
-            // Éxito al actualizar la cantidad en stock
-            header('Location: venta_registrar.php');
-            exit;
+    if ($conn->query($sql)) {
+        $IdVenta = $conn->insert_id;
+
+        // Consulta para obtener la cantidad actual en stock del producto
+        $sqlStock = "SELECT CantidadStock FROM tblproductos WHERE IdProducto = '$IdProducto'";
+        $resultStock = $conn->query($sqlStock);
+
+        if ($resultStock->num_rows > 0) {
+            $rowStock = $resultStock->fetch_assoc();
+            $cantidadActual = $rowStock['CantidadStock'];
+            
+            // Calcular la nueva cantidad en stock restando la cantidad vendida
+            $nuevaCantidad = $cantidadActual - $CantidadVendida;
+
+            // Actualizar la cantidad en stock en la tabla de productos
+            $sqlUpdateStock = "UPDATE tblproductos SET CantidadStock = $nuevaCantidad WHERE IdProducto = '$IdProducto'";
+            if ($conn->query($sqlUpdateStock)) {
+                // Éxito al actualizar la cantidad en stock
+                header('Location: venta_registrar.php');
+                exit;
+            } else {
+                // Error al actualizar la cantidad en stock
+                echo 'Error al actualizar la cantidad en stock: ' . $conn->error;
+            }
         } else {
-            // Error al actualizar la cantidad en stock
-            echo 'Error al actualizar la cantidad en stock: ' . $conn->error;
+            // No se encontró el producto
+            echo 'No se encontró el producto.';
         }
+
     } else {
-        // No se encontró el producto
-        echo 'No se encontró el producto.';
+        echo 'Error al insertar en la tabla de ventas: ' . $conn->error;
     }
 
 } else {
-    echo 'Error al insertar en la tabla de ventas: ' . $conn->error;
+    echo 'No hay empleados con el rol permitido para registrar ventas.';
 }
 
 header('Location: venta_registrar.php');
-
 ?>
