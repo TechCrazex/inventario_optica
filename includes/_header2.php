@@ -71,12 +71,6 @@ if (isset($_SESSION['Correo'])) {
             </div>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="producto_registrar2.php">
-                    <span class="material-icons">pattern</span>
-                    <span class="nav-tex" >Productos</span>
-                </a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link collapsed" href="cliente_registrar2.php">
                     <span class="material-icons">pattern</span>
                     <span>Clientes</span>
