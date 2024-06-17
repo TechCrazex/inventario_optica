@@ -10,10 +10,10 @@
             
             <input type="hidden" name="IdVenta" id="IdVenta">
 
-            <div class="mb-3">
-                <label for="NumeroVenta">Número Venta: </label>
-                <input type="text" name="NumeroVenta" id="NumeroVenta" class="form-control" required>
-            </div>
+            <!--<div class="mb-3">-->
+            <!--    <label for="NumeroVenta">Número Venta: </label>-->
+            <!--    <input type="text" name="NumeroVenta" id="NumeroVenta" class="form-control" required>-->
+            <!--</div>-->
 
             <div class="mb-3">
                 <label for="cliente">Cliente: </label>
