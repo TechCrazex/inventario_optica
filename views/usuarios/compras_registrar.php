@@ -34,7 +34,7 @@ $proveedor = $conn->query($queryProveedor);
 $queryProducto = "SELECT * FROM tblproductos";
 $producto = $conn->query($queryProducto);
 
-$queryEmpleado = "SELECT * FROM tblempleados WHERE IdRol = 1";
+$queryEmpleado = "SELECT * FROM tblempleados WHERE IdRol = 2";
 $empleado = $conn->query($queryEmpleado);
 ?>
 
