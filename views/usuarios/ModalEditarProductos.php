@@ -12,7 +12,7 @@
 
             <div class="mb-3">
                 <label for="NombreProducto">Nombre Del Producto: </label>
-                <select type="text" name="NombreProducto" id="NombreProducto" class="form-select" required>
+                <select name="NombreProducto" id="NombreProducto" class="form-select" required>
                     <option value="">Seleccionar Producto...</option>
                     <?php
                     require '../../includes/conexionBD.php';
@@ -28,25 +28,25 @@
             </div>
 
             <div class="mb-3">
-                <label for="Descripcion">Descripcion: </label>
-                <textarea type="text" name="Descripcion" id="Descripcion" rows="3" class="form-control" required></textarea>
+                <label for="Descripcion">Descripción: </label>
+                <textarea name="Descripcion" id="Descripcion" rows="3" class="form-control" required></textarea>
             </div>
 
             <div class="mb-3">
-              <label for="IdProveedor">Proveedor Asociado: </label>
-              <select name="IdProveedor" id="IdProveedor" class="form-select" required>
-              <option value="">Seleccionar Proveedor...</option>
-              <?php
-              require '../../includes/conexionBD.php';
-              $sql = "SELECT DISTINCT IdProveedor, NombreProveedor FROM tblproveedores WHERE NombreProveedor IS NOT NULL";
-              $result = $conn->query($sql);
-              if ($result->num_rows > 0) {
-                  while($row = $result->fetch_assoc()) {
-                    echo '<option value="' . $row["IdProveedor"] . '">' . $row["NombreProveedor"] . '</option>';
-                  }
-              }
-              ?>
-              </select>
+                <label for="IdProveedor">Proveedor Asociado: </label>
+                <select name="IdProveedor" id="IdProveedor" class="form-select" required>
+                <option value="">Seleccionar Proveedor...</option>
+                <?php
+                require '../../includes/conexionBD.php';
+                $sql = "SELECT DISTINCT IdProveedor, NombreProveedor FROM tblproveedores WHERE NombreProveedor IS NOT NULL";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        echo '<option value="' . $row["IdProveedor"] . '">' . $row["NombreProveedor"] . '</option>';
+                    }
+                }
+                ?>
+                </select>
             </div>
 
             <div class="mb-3">
@@ -55,9 +55,9 @@
             </div>
 
             <div class="mb-3">
-                <label for="IdCategoria">Categoria: </label>
-                <select type="text" name="IdCategoria" id="IdCategoria" class="form-select" required>
-                <option value="">Seleccionar Categoria ...</option>
+                <label for="IdCategoria">Categoría: </label>
+                <select name="IdCategoria" id="IdCategoria" class="form-select" required>
+                <option value="">Seleccionar Categoría...</option>
                 <?php while($rowCategoria = $Categoria->fetch_assoc()) { ?>
                     <option value="<?php echo $rowCategoria["IdCategoria"]; ?>"><?= $rowCategoria["Categoria"] ?></option>
                 <?php } ?>
@@ -66,8 +66,8 @@
 
             <div class="mb-3">
                 <label for="IdMarca">Marca: </label>
-                <select type="text" name="IdMarca" id="IdMarca" class="form-select" required>
-                <option value="">Seleccionar Marca ...</option>
+                <select name="IdMarca" id="IdMarca" class="form-select" required>
+                <option value="">Seleccionar Marca...</option>
                 <?php while($rowMarca = $Marca->fetch_assoc()) { ?>
                     <option value="<?php echo $rowMarca["IdMarca"]; ?>"><?= $rowMarca["Marca"] ?></option>
                 <?php } ?>
@@ -86,8 +86,8 @@
 
             <div class="mb-3">
                 <label for="IdMaterial">Material: </label>
-                <select type="text" name="IdMaterial" id="IdMaterial" class="form-select" required>
-                <option value="">Seleccionar Material ...</option>
+                <select name="IdMaterial" id="IdMaterial" class="form-select" required>
+                <option value="">Seleccionar Material...</option>
                 <?php while($rowMaterial = $Material->fetch_assoc()) { ?>
                     <option value="<?php echo $rowMaterial["IdMaterial"]; ?>"><?= $rowMaterial["Material"] ?></option>
                 <?php } ?>
@@ -103,6 +103,3 @@
     </div>
   </div>
 </div>
-
-
-
