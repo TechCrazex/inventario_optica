@@ -31,7 +31,6 @@ $fechaActual = date('Y-m-d');
             <select class="form-select" id="tipoInforme" name="tipoInforme" required>
                 <option value="">Seleccione un informe</option>
                 <option value="ventas">Informe de Ventas</option>
-                <option value="proveedores">Informe de Proveedores</option>
             </select>
         </div>
         <div class="mb-3">
