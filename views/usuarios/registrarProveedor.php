@@ -29,7 +29,7 @@ if (!isset($_SESSION['Correo'])) {
                     <input type="text" class="light-table-filter" data-table="table-id" placeholder="Buscar...">
                 </div>
             <div class="col-auto">
-                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalProveedores">Nuevo registro</a>
+                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalRegistrarProveedores">Nuevo registro</a>
             </div>
         </div>    
     </form>
