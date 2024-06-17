@@ -6,7 +6,7 @@ if (!isset($_SESSION['Correo'])) {
 }
 ?>
 <?php require '../../includes/_db.php' ?>
-<?php require '../../includes/_header.php' ?>
+<?php require '../../includes/_header2.php' ?>
 
 <!DOCTYPE html>
 <html lang="en">
