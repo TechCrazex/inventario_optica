@@ -10,10 +10,6 @@
             
             <input type="hidden" name="IdCompra" id="IdCompra">
 
-            <div class="mb-3">
-                <label for="NumeroCompra">Número Compra: </label>
-                <input type="text" name="NumeroCompra" id="NumeroCompra" class="form-control" required>
-            </div>
 
             <div class="mb-3">
                 <label for="proveedor">Proveedor: </label>
