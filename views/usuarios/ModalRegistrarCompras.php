@@ -62,8 +62,10 @@
             <input type="hidden" id="PrecioTotal" name="PrecioTotal">
 
             <div class="mb-3">
-                <label for="FechaCompra">Fecha Compra: </label>
-                <input type="date" name="FechaCompra" id="FechaCompra" class="form-control" required>
+              <form>
+                 <label for="FechaCompra">Fecha Compra:</label>
+                 <input type="date" name="FechaCompra" id="FechaCompra" class="form-control" required>
+              </form>
             </div>
 
             <div class="mb-3">
@@ -107,4 +109,20 @@
     })
     .catch(error => console.error('Error:', error));
 });
+</script>
+<script>
+    // Obtener el elemento de fecha de compra
+    const fechaCompraInput = document.getElementById('FechaCompra');
+
+    // Obtener la fecha actual en formato YYYY-MM-DD
+    const fechaActual = new Date();
+
+    // Convertir la fecha actual a las 00:00:00 horas para incluir todo el día actual
+    fechaActual.setHours(0, 0, 0, 0);
+
+    // Formatear la fecha actual como YYYY-MM-DD
+    const fechaMinima = fechaActual.toISOString().split('T')[0];
+
+    // Establecer el atributo max en el input de fecha para limitar fechas futuras
+    fechaCompraInput.setAttribute('max', fechaMinima);
 </script>
