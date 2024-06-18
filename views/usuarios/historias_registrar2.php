@@ -77,10 +77,10 @@ $cliente = $conn->query($queryCliente);
 
     </table>
 
-    <?php include 'ModalRegistrarHistorias.php';  ?>
-    <?php include 'ModalEliminarHistorias.php';  ?>
+    <?php include 'ModalRegistrarHistorias2.php';  ?>
+    <?php include 'ModalEliminarHistorias2.php';  ?>
     <?php $cliente->data_seek(0); ?>
-    <?php include 'ModalEditarHistorias.php';  ?>
+    <?php include 'ModalEditarHistorias2.php';  ?>
 
     <script>
         let ModalEditarHistorias = document.getElementById('ModalEditarHistorias')
@@ -97,7 +97,7 @@ $cliente = $conn->query($queryCliente);
             let inputAntecedentes = ModalEditarHistorias.querySelector('.modal-body #Antecedentes')
             let inputDescripcion = ModalEditarHistorias.querySelector('.modal-body #Descripcion')
 
-            let url = "editarHistorias.php"
+            let url = "editarHistorias2.php"
             let formData = new FormData();
             formData.append('IdHistoriaClinica', IdHistoriaClinica);
 // Agrega otras líneas para los demás campos del formulario
