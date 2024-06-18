@@ -3,7 +3,6 @@
 require '../../includes/conexionBD.php';
 
 $IdVenta = $conn->real_escape_string($_POST['IdVenta']);
-$NumeroVenta = $conn->real_escape_string($_POST['NumeroVenta']);
 $IdCliente = $conn->real_escape_string($_POST['cliente']);
 $IdEmpleado = $conn->real_escape_string($_POST['empleado']);
 $IdProducto = $conn->real_escape_string($_POST['producto']);
@@ -19,7 +18,6 @@ $Categoria = $conn->real_escape_string($_POST['Categoria']);
 
 
 $sql = "UPDATE tblventas SET
-            NumeroVenta ='$NumeroVenta',
             IdCliente = '$IdCliente',
             IdEmpleado = '$IdEmpleado',
             IdProducto = '$IdProducto',
@@ -50,7 +48,8 @@ if ($conn->query($sql)) {
          $sqlUpdateStock = "UPDATE tblproductos SET CantidadStock = $nuevaCantidad WHERE IdProducto = '$IdProducto'";
          if ($conn->query($sqlUpdateStock)) {
              // Éxito al actualizar la cantidad en stock
-             echo 'registrado';
+            header('Location: venta_registrar2php');
+            exit;
          } else {
              // Error al actualizar la cantidad en stock
              echo 'Error al actualizar la cantidad en stock: ' . $conn->error;
@@ -64,5 +63,5 @@ if ($conn->query($sql)) {
      echo 'Error al insertar en la tabla de ventas: ' . $conn->error;
 }
 
-header('Location: venta_registrar.php');
+header('Location: venta_registrar2.php');
 ?>
