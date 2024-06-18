@@ -6,14 +6,14 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="ActualizarVentas.php" method="POST" enctype="multipart/form-data">
+        <form action="ActualizarVentas2.php" method="POST" enctype="multipart/form-data">
             
             <input type="hidden" name="IdVenta" id="IdVenta">
 
-            <div class="mb-3">
-                <label for="NumeroVenta">Número Venta: </label>
-                <input type="text" name="NumeroVenta" id="NumeroVenta" class="form-control" required>
-            </div>
+            <!--<div class="mb-3">-->
+            <!--    <label for="NumeroVenta">Número Venta: </label>-->
+            <!--    <input type="text" name="NumeroVenta" id="NumeroVenta" class="form-control" required>-->
+            <!--</div>-->
 
             <div class="mb-3">
                 <label for="cliente">Cliente: </label>
