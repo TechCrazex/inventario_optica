@@ -109,13 +109,13 @@ $empleado = $conn->query($queryEmpleado);
 
     
 
-    <?php include 'ModalRegistrarVentas.php';  ?>
-    <?php include 'ModalEliminarVentas.php';  ?>
+    <?php include 'ModalRegistrarVentas2.php';  ?>
+    <?php include 'ModalEliminarVentas2.php';  ?>
     <?php $producto->data_seek(0); ?>
     <?php $cliente->data_seek(0); ?>
     <?php $categorias->data_seek(0); ?>
     <?php $empleado->data_seek(0); ?>
-    <?php include 'ModalEditarVentas.php';  ?>
+    <?php include 'ModalEditarVentas2.php';  ?>
 
     <script>
         let ModalEditarVentas = document.getElementById('ModalEditarVentas')
@@ -138,7 +138,7 @@ $empleado = $conn->query($queryEmpleado);
             let inputObservacion = ModalEditarVentas.querySelector('.modal-body #Observacion')
             let inputCategoria = ModalEditarVentas.querySelector('.modal-body #Categoria')
 
-            let url = "editarVentas.php"
+            let url = "editarVentas2.php"
             let formData = new FormData();
             formData.append('IdVenta', IdVenta);
 // Agrega otras líneas para los demás campos del formulario
