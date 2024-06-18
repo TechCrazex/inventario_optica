@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['fechaInicio']) && iss
     }
 
     // Crear instancia de TCPDF con tamaño de página personalizado
-    $customLayout = array(600, 300); // Ancho y alto personalizados en mm
+    $customLayout = array(400, 300); // Ancho y alto personalizados en mm
     $pdf = new TCPDF('L', PDF_UNIT, $customLayout, true, 'UTF-8', false);
 
     // Establecer información del documento
