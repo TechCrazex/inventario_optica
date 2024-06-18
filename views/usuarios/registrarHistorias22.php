@@ -12,10 +12,10 @@ $sql = "INSERT INTO tblhistoriasclinicass (IdCliente, Fecha, Antecedentes, Descr
 
 if ($conn->query($sql)) {
     $IdHistoriaClinica = $conn->insert_id;
-    echo 'registrado';
+    header('Location: historias_registrar2.php');
 } else {
     echo 'Error: ' . $conn->error;
 }
 
-header('Location: historias_registrar2.php');
+
 ?>
