@@ -6,7 +6,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="ActualizarHistorias.php" method="POST" enctype="multipart/form-data">
+        <form action="ActualizarHistorias2.php" method="POST" enctype="multipart/form-data">
             
         <input type="hidden" name="IdHistoriaClinica" id="IdHistoriaClinica">
             
