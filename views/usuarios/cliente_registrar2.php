@@ -26,7 +26,7 @@ $clientes = $conn->query($sqlCliente);
 
 ?>
 
-    <form action="cliente_registrar.php" method="POST">
+    <form action="cliente_registrar2.php" method="POST">
         <div class="tit-pri">
             <h1>Registros De Los Clientes</h1>
                 <div>
@@ -70,9 +70,9 @@ $clientes = $conn->query($sqlCliente);
 
     </table>
 
-    <?php include 'ModalRegistrarClientes.php';  ?>
-    <?php include 'ModalEliminarClientes.php';  ?>
-    <?php include 'ModalEditarClientes.php';  ?>
+    <?php include 'ModalRegistrarClientes2.php';  ?>
+    <?php include 'ModalEliminarClientes2.php';  ?>
+    <?php include 'ModalEditarClientes2.php';  ?>
 
     <script>
         let ModalEditarClientes = document.getElementById('ModalEditarClientes')
