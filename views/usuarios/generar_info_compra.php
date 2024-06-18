@@ -29,8 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['fechaInicio']) && iss
         die('Error en la consulta: ' . mysqli_error($conn));
     }
 
-    // Crear instancia de TCPDF
-    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+    // Crear instancia de TCPDF con tamaño de página personalizado
+    $customLayout = array(600, 300); // Ancho y alto personalizados en mm
+    $pdf = new TCPDF('L', PDF_UNIT, $customLayout, true, 'UTF-8', false);
 
     // Establecer información del documento
     $pdf->SetCreator(PDF_CREATOR);
@@ -59,6 +60,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['fechaInicio']) && iss
     $html .= '<p>Fecha de inicio: ' . $fechaInicio . '</p>';
     $html .= '<p>Fecha de fin: ' . $fechaFin . '</p>';
 
+    // Inicializar variable para el total de compras
+    $totalCompras = 0;
+
     // Crear tabla para mostrar los datos de compras
     $html .= '<table border="1" cellpadding="5" cellspacing="0">';
     $html .= '<tr><th>ID Compra</th><th>ID Proveedor</th><th>ID Producto</th><th>ID Empleado</th><th>Cantidad Comprada</th><th>Precio Unidad</th><th>Precio Total</th><th>Fecha Compra</th><th>Observación</th></tr>';
@@ -75,9 +79,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['fechaInicio']) && iss
         $html .= '<td>' . $row['FechaCompra'] . '</td>';
         $html .= '<td>' . $row['Observación'] . '</td>';
         $html .= '</tr>';
+
+        // Sumar el precio total de cada compra
+        $totalCompras += $row['PrecioTotal'];
     }
 
     $html .= '</table>';
+
+    // Añadir el total de compras al final de la tabla
+    $html .= '<h2>Total de Compras: ' . number_format($totalCompras, 2) . '</h2>';
 
     // Escribir contenido HTML en el documento PDF
     $pdf->writeHTML($html, true, false, true, false, '');
